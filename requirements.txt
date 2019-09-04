@@ -7,3 +7,4 @@ pycodestyle==2.5.0
 pytz==2019.2
 redis==3.3.8
 sqlparse==0.3.0
+mysqlclient==1.4.1

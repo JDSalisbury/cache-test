@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  server:
+    build: ./django_cache
+    command: bash -c "cd django_cache && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/django_cache
+    ports:
+      - "8000:8000"
