@@ -25,7 +25,7 @@ SECRET_KEY = '2m78@j%w93g(02e=vzg4^23!403%yh4lf-$vm3ac=z%_+cd2yz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -88,8 +88,8 @@ DATABASES = {
         'NAME': 'CachTime',
         'USER': 'root',
         'PASSWORD': 'password',
-        'HOST': 'localhost'
-    }
+        'HOST': '127.0.0.1',
+        'PORT': '3306', }
 }
 
 

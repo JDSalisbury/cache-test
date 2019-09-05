@@ -1,7 +1,7 @@
 FROM python:3
-ENV PYTHONBUFFERED 1
+ENV PYTHONUNBUFFERED 1
 EXPOSE 8000
-RUN mkdir/django_cache
+RUN mkdir /django_cache
 WORKDIR /django_cache
 COPY requirements.txt /django_cache
 RUN pip install -r requirements.txt
