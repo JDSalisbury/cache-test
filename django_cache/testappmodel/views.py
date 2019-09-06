@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import BlogSerializer
 from .models import Blog
+from .tasks import data_dump
 from rest_framework import generics, viewsets
 
 
@@ -26,11 +27,7 @@ class DataBlastView(viewsets.ModelViewSet):
     serializer_class = BlogSerializer
 
     def add_data(self, request, pk, *args, **kwargs):
-        for x in range(pk):
-            fake = Faker()
-            Blog.objects.create(
-                name=fake.name(), slug=fake.slug(), body=fake.text())
-
+        data_dump.delay(pk)
         return Response(status=status.HTTP_201_CREATED)
 
 
