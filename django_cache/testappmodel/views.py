@@ -18,17 +18,22 @@ from rest_framework import generics, viewsets
 class BlogView(generics.RetrieveAPIView):
     lookup_field = 'pk'
     serializer_class = BlogSerializer
-
-    def get_queryset(self):
-        return Blog.objects.all()
+    queryset = Blog.objects.all()
 
 
 class DataBlastView(viewsets.ModelViewSet):
     serializer_class = BlogSerializer
 
     def add_data(self, request, pk, *args, **kwargs):
-        data_dump.delay(pk)
-        return Response(status=status.HTTP_201_CREATED)
+        try:
+            task = data_dump.delay(pk)
+            context = {}
+            context['task_id'] = task.id
+            context['task_status'] = task.status
+
+            return Response(context)
+        except Exception:
+            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class BlogListView(APIView):

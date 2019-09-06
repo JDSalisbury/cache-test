@@ -1,5 +1,6 @@
 amqp==2.5.1
 autopep8==1.4.4
+Babel==2.7.0
 billiard==3.6.1.0
 celery==4.3.0
 Django==2.2.5
@@ -7,6 +8,9 @@ django-nine==0.2.2
 django-redis==4.10.0
 django-rest-framework-tricks==0.2.10
 djangorestframework==3.10.3
+factory-boy==2.12.0
+Faker==2.0.1
+flower==0.9.3
 importlib-metadata==0.20
 kombu==4.6.4
 minepy==1.2.4
@@ -17,10 +21,13 @@ numpy==1.17.1
 protobuf==3.9.1
 psycopg2-binary==2.8.3
 pycodestyle==2.5.0
+python-dateutil==2.8.0
 pytz==2019.2
 redis==3.3.8
 Shapely==1.6.4.post2
 six==1.12.0
 sqlparse==0.3.0
+text-unidecode==1.2
+tornado==5.1.1
 vine==1.3.0
 zipp==0.6.0
