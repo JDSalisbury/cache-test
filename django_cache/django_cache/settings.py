@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from celery.schedules import crontab
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'testappmodel',
-    'rest_framework'
+    'rest_framework',
+    'django_celery_beat'
 ]
 
 MIDDLEWARE = [
@@ -137,3 +139,16 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
+
+CELERY_TIMEZONE = 'UTC'
+CELERY_BEAT_SCHEDULE = {
+    'send-summary-every-hour': {
+        'task': 'summary',
+        'schedule': 10.0,
+        'args': [1]
+    },
+    'send-notification-on-friday-afternoon': {
+        'task': 'testappmodel.tasks.send_notification',
+        'schedule': crontab(hour=16, day_of_week=5),
+    }
+}

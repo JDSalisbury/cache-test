@@ -1,4 +1,4 @@
-from celery import shared_task
+from celery import shared_task, task
 from .models import Blog
 from faker import Faker
 
@@ -9,3 +9,14 @@ def data_dump(num):
         fake = Faker()
         Blog.objects.create(
             name=fake.name(), slug=fake.slug(), body=fake.text())
+
+
+@task(name='summary')
+def send_import_summary(test):
+    print(test)
+    print('this is a summary!!')
+
+
+@shared_task
+def send_notification():
+    print('We Did it!!')
