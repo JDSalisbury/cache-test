@@ -5,6 +5,7 @@ billiard==3.6.1.0
 celery==4.3.0
 Django==2.2.5
 django-celery-beat==1.5.0
+django-celerybeat-status==0.0.10
 django-nine==0.2.2
 django-redis==4.10.0
 django-rest-framework-tricks==0.2.10
