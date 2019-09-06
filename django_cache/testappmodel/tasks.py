@@ -13,6 +13,7 @@ def data_dump(num):
 
 @task(name='summary')
 def send_import_summary(test):
+    Blog.objects.filter(name__startswith='T').delete()
     print(test)
     print('this is a summary!!')
 

@@ -144,7 +144,7 @@ CELERY_TIMEZONE = 'UTC'
 CELERY_BEAT_SCHEDULE = {
     'send-summary-every-hour': {
         'task': 'summary',
-        'schedule': 10.0,
+        'schedule': 3600.0,
         'args': [1]
     },
     'send-notification-on-friday-afternoon': {
