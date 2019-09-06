@@ -17,3 +17,7 @@ run flower to view tasks doing things
 ```
 celery flower -A django_cache --broker=redis://localhost:6379//
 ```
+
+[Celery-Beat](https://www.merixstudio.com/blog/django-celery-beat/)
+
+[Redis-Celery](https://stackabuse.com/asynchronous-tasks-in-django-with-redis-and-celery/)
