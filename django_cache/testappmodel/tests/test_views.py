@@ -20,6 +20,7 @@ class ViewTests(TestCase):
 
     @tag('view')
     def test_blogs_view(self):
+        """ Blogs List view  test. """
         response = self.client.get('/api/v1/blogs/', follow=True)
         self.assertEqual(response.status_code, 200)
 
