@@ -10,3 +10,7 @@ def multiplying(x, y):
 
 def subtracting(x, y):
     return x-y
+
+
+def dividing(x, y):
+    return x/y

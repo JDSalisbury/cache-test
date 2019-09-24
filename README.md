@@ -1,5 +1,11 @@
 # cache-test
 
+run Redis
+
+```
+redis-server
+```
+
 run celery worker
 
 ```
@@ -18,8 +24,20 @@ run flower to view tasks doing things
 celery flower -A django_cache --broker=redis://localhost:6379//
 ```
 
+Added coverage .py
+
+```
+coverage erase
+coverage run manage.py test
+coverage report -m
+coverage html
+
+```
+
 [Celery-Beat](https://www.merixstudio.com/blog/django-celery-beat/)
 
 [Redis-Celery](https://stackabuse.com/asynchronous-tasks-in-django-with-redis-and-celery/)
 
 [Check to see if tasks are running](https://www.vinta.com.br/blog/2017/how-make-sure-celery-beat-tasks-are-working/)
+
+[Coverage](https://coverage.readthedocs.io/en/v4.5.x/index.html)
