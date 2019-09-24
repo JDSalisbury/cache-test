@@ -41,3 +41,6 @@ coverage html
 [Check to see if tasks are running](https://www.vinta.com.br/blog/2017/how-make-sure-celery-beat-tasks-are-working/)
 
 [Coverage](https://coverage.readthedocs.io/en/v4.5.x/index.html)
+
+Allegedly this is the best way to test Tasks.
+[Test Celery Tasks](https://www.distributedpython.com/2018/05/01/unit-testing-celery-tasks/)
