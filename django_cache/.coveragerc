@@ -1,10 +1,26 @@
+[run]
+branch = True
+omit =
+    */tests*
+    */migrations/*
+    *__init__.py*
+    *admin.py*
+    */env/*
+    *manage.py*
+    */django_cache/django_cache/*
+
+
 [report]
 omit = 
-    ~/Documents/Code/Python_Code/cache-test/env/*,
-    ~/Documents/Code/Python_Code/cache-test/django_cache/manage.py,
-    ~/Documents/Code/Python_Code/cache-test/django_cache/django_cache/*,
-    ~/Documents/Code/Python_Code/cache-test/django_cache/testappmodel/migrations/*,
-    ~/Documents/Code/Python_Code/cache-test/django_cache/testappmodel/tests/*,
-    ~/Documents/Code/Python_Code/cache-test/django_cache/testappmodel/__init__.py,
+    */tests*
+    */migrations/*
+    *__init__.py*
+    *admin.py*
+    */env/*
+    *manage.py*
+    */django_cache/django_cache/*
 
-
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    if self.debug:

@@ -32,7 +32,7 @@ class DataBlastView(viewsets.ModelViewSet):
             context['task_status'] = task.status
 
             return Response(context)
-        except Exception:
+        except Exception:  # pragma: no cover
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
@@ -42,5 +42,5 @@ class BlogListView(APIView):
             blogs = Blog.objects.all()
             serializer = BlogSerializer(blogs, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        except Exception:
+        except Exception:  # pragma: no cover
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
