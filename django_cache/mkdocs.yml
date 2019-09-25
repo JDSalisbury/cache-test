@@ -1,0 +1,6 @@
+site_name: Django_Cache
+nav:
+  - Home: index.md
+  - Endpoints: endpoints.md
+  - About: about.md
+theme: readthedocs
