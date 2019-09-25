@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import BlogSerializer
 from .models import Blog
-from .tasks import data_dump
+from .tasks import data_dump, send_email_task
 from rest_framework import generics, viewsets
 
 
@@ -19,6 +19,17 @@ class BlogView(generics.RetrieveAPIView):
     lookup_field = 'pk'
     serializer_class = BlogSerializer
     queryset = Blog.objects.all()
+
+
+class EmailView(viewsets.ModelViewSet):
+
+    def email(self, request):
+        task = send_email_task.delay()
+        context = {}
+        context['task_id'] = task.id
+        context['task_status'] = task.status
+
+        return Response(context)
 
 
 class DataBlastView(viewsets.ModelViewSet):
