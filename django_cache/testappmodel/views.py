@@ -28,7 +28,6 @@ class EmailView(viewsets.ModelViewSet):
         context = {}
         context['task_id'] = task.id
         context['task_status'] = task.status
-
         return Response(context)
 
 

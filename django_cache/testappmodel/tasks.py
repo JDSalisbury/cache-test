@@ -50,11 +50,11 @@ def delete_trash_task(folder=trash_folder):
             print(e)
 
 
-@shared_task(name='Delete Folder Contents when over 6 files')
-def delete_txt_folder_task():
+@shared_task(name='Delete Folder Contents when over limit')
+def delete_txt_folder_task(limit=content_limit):
     list = os.listdir(txt_folder)
     number_files = len(list)
-    if number_files >= content_limit:
+    if number_files >= limit:
         delete_trash_task(txt_folder)
 
 

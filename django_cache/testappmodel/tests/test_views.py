@@ -45,3 +45,11 @@ class ViewTests(TestCase):
         res = self.client.get('/api/v1/dataDrop/10/', follow=True)
         print(res.data)
         self.assertEqual(res.status_code, 200)
+
+    @tag('view')
+    def test_send_email(self):
+        """ Testing the Email End point, this actually runs task. """
+
+        res = self.client.get('/api/v1/email/', follow=True)
+        print(res.data)
+        self.assertEqual(res.status_code, 200)

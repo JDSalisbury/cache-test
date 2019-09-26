@@ -1,5 +1,5 @@
 from django.test import TestCase
-from testappmodel.tasks import send_notification, data_dump, send_import_summary, send_email_task
+from testappmodel.tasks import *
 from django.test import tag
 
 
@@ -27,4 +27,22 @@ class TaskTests(TestCase):
     def test_email_task(self):
         """ Sending an Email via celery """
         task = send_email_task.s().apply()
+        self.assertEqual(task.status, "SUCCESS")
+
+    @tag('task')
+    def test_delete_trash_task(self):
+        """ Delete Trash Contents Task Test """
+        task = delete_trash_task.s().apply()
+        self.assertEqual(task.status, "SUCCESS")
+
+    @tag('task')
+    def test_create_txt_file(self):
+        """ Task That creates A file """
+        task = create_txt_file_task.s().apply()
+        self.assertEqual(task.status, "SUCCESS")
+
+    @tag('task')
+    def test_delete_txt_folder_task(self):
+        """ Deleting folder contents based on number of files inside """
+        task = delete_txt_folder_task.s(0).apply()
         self.assertEqual(task.status, "SUCCESS")
