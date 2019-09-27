@@ -86,14 +86,26 @@ WSGI_APPLICATION = 'django_cache.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'CachTime',
+#         'USER': 'root',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#         'PASSWORD': DB_PASSWORD,
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'CachTime',
+        'NAME': 'my-app-db',
         'USER': 'root',
-        'PASSWORD': DB_PASSWORD,
-        'HOST': '127.0.0.1',
-        'PORT': '3306', }
+        'PASSWORD': 'password',
+        'HOST': 'db',
+        'PORT': 3306,
+    }
 }
 
 
@@ -136,13 +148,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_BROKER_URL = 'redis://Redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://Redis:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 
 CELERY_TIMEZONE = 'US/Eastern'
+
 # CELERY_BEAT_SCHEDULE = {
 #     'send-summary-every-hour': {
 #         'task': 'summary',

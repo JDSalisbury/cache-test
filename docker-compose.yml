@@ -3,40 +3,108 @@ version: "3"
 services:
   version: '3'
 
+
+
 services:
 
   redis:
-    image: redis:5.0.5
-    hostname: redis
-    container_name: cache
+    container_name: Redis
+    image: redis
     expose:
       - 6379
+    ports:
+      - '6379:6379'
 
   db:
-    image: mariadb:5.5
-    restart: always
-    environment:
-      - MYSQL_HOST=127.0.0.1
-      - MYSQL_PORT=3306
-      - MYSQL_ROOT_HOST=CachTime
-      - MYSQL_DATABASE=CachTime
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=password
-      - MYSQL_ROOT_PASSWORD=password
-    volumes:
-      - .:/var/lib/mysql
+    container_name: DB
+    image: mysql:5.7
     ports:
-      - "3306:3306"
+      - '3306:3306'
+    environment:
+       MYSQL_DATABASE: 'my-app-db'
+       MYSQL_USER: 'root'
+       MYSQL_PASSWORD: 'password'
+       MYSQL_ROOT_PASSWORD: 'password'
+    restart: always
+
 
   server:
+    container_name: Django
     build: ./django_cache
-    command: bash -c "cd django_cache && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c " sleep 10 &&
+     service memcached start &&
+     cd django_cache &&
+     python manage.py makemigrations &&
+     python manage.py migrate &&
+     python manage.py runserver 0.0.0.0:8001"
     volumes:
       - .:/django_cache
     ports:
-      - "8000:8000"
+      - "8001:8001"
     depends_on:
       - db
       - redis
+    restart: always
+
+  celery:
+    container_name: Celboy
+    build: ./django_cache
+    command: bash -c "cd django_cache &&
+      celery worker -A django_cache --loglevel=info "
+    volumes:
+      - .:/django_cache
+    expose:
+      - 6379
+    depends_on:
+      - server
+      - redis
     links:
-      - db:mariadb55
+      - redis
+    restart: always
+
+  beat:
+    container_name: BeatBoy
+    build: ./django_cache
+    command: bash -c "cd django_cache &&
+      celery -A django_cache beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler "
+    volumes:
+      - .:/django_cache
+    expose:
+      - 6379
+    depends_on:
+      - server
+      - redis
+    links:
+      - redis
+    restart: always
+
+  flower:
+    container_name: FloBoy
+    build: ./django_cache
+    command: bash -c "cd django_cache &&
+      celery flower -A django_cache --broker=redis://Redis:6379/0"
+    volumes:
+      - .:/django_cache
+    expose:
+      - 5555
+    ports:
+      - "5555:5555"
+    restart: always
+
+
+  mkdocs:
+    container_name: DocBoy
+    build: ./django_cache
+    command: bash -c "cd django_cache &&
+      mkdocs serve --dev-addr=0.0.0.0:80"
+    volumes:
+      - .:/django_cache
+    expose:
+      - 8084
+    ports:
+      - "8084:80"
+    restart: always
+
+
+
+ 

@@ -34,6 +34,14 @@ coverage html
 
 ```
 
+Enter Docker
+
+```
+docker ps # lists running containers
+docker exec -it <container name> /bin/bash
+
+```
+
 [Celery-Beat](https://www.merixstudio.com/blog/django-celery-beat/)
 
 [Redis-Celery](https://stackabuse.com/asynchronous-tasks-in-django-with-redis-and-celery/)
