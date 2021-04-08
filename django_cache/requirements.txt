@@ -10,7 +10,7 @@ Click==7.0
 coreapi==2.3.3
 coreschema==0.0.4
 coverage==4.5.4
-Django==2.2.13
+Django==2.2.20
 django-celery-beat==1.5.0
 django-celerybeat-status==0.0.10
 django-mysql==2.2.0
