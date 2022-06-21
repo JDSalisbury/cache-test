@@ -37,7 +37,7 @@ mkdocs==1.0.4
 more-itertools==7.2.0
 mysql-connector-python==8.0.17
 mysqlclient==1.4.4
-numpy==1.17.1
+numpy==1.22.0
 packaging==19.2
 protobuf==3.9.1
 psycopg2-binary==2.8.3
